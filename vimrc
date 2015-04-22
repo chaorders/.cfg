@@ -52,6 +52,10 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
+set number
+filetype on
+
+
 "Press F5 to function the C,C++,Java script
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
@@ -87,6 +91,9 @@ set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936
 set fileencoding=utf-8
+set guifont=Monospace\ 13
+
+
 
 "auto
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
