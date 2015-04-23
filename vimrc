@@ -21,6 +21,12 @@ set number
 filetype on
 filetype plugin on
 let mapleader=";"
+set fdm=marker		" 6 methods: manual,indent,syntax,marker,diff,expr
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set cindent
+set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 "set mouse=a		" Enable mouse usage (all modes)
 
 "auto_complete
