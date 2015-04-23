@@ -1,0 +1,5 @@
+=net-dialup/ppp-2.4.5-r3 ipv6
+=dev-lang/python-2.7.6 sqlite
+=media-plugins/alsa-plugins-1.0.27-r1 pulseaudio
+>=sys-libs/zlib-1.2.8-r1 minizip
+>=dev-libs/elfutils-0.158 static-libs

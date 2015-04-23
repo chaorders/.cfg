@@ -1,0 +1,7 @@
+[Unit]
+Description=status email for to thomas
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/systemd-getmail
+User=thomas

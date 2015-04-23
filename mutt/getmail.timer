@@ -1,0 +1,19 @@
+[Unity]
+Description=status email for thomas
+
+[Timer]
+#options: daily, weekly
+#OnCalendar=hourly
+
+#It starts immediately if it missed the last time.
+Persistent=true
+
+#First time to run after system boot.
+OnBootSec=3min
+
+#period
+OnUnitActiveSec=20min
+
+
+[Install]
+WantedBy=timers.target

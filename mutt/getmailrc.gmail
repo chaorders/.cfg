@@ -1,0 +1,14 @@
+[options]
+verbose = 0
+delete = false
+message_log = /home/thomas/log/getmail.log
+
+[retriever]
+type = SimpleIMAPSSLRetriever
+server = imap.gmail.com
+username = 
+password = 
+
+[destination]
+type = Maildir
+path = /home/thomas/Mail/inbox/

@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/bin/getmail -v -n -r /home/thomas/.getmail/getmailrc.gmail --getmaildir=/home/thomas/.getmail/
