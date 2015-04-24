@@ -28,6 +28,24 @@ set autoindent
 set cindent
 set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 "set mouse=a		" Enable mouse usage (all modes)
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936
+set fileencoding=utf-8
+
+syntax enable
+set background=dark
+
+if has('gui_running')
+	colorscheme monokai-modified
+	set guifont=Monospace\ 13
+else
+	colorscheme slate
+endif
+
+
+
 
 "auto_complete
 set tags+=~/.vim/tags/code_complete_tags
@@ -61,22 +79,6 @@ endfunc
 map <F3> :tabnew .<CR>  
 map <C-F3> \be  
 
-"?
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936
-set fileencoding=utf-8
-
-syntax enable
-set background=dark
-
-if has('gui_running')
-	colorscheme solarized
-	set guifont=Monospace\ 13
-else
-	colorscheme slate
-endif
 
 
 "auto

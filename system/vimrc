@@ -1,28 +1,4 @@
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim and sourced by
-" the call to :runtime you can find below.  If you wish to change any of those
-" settings, you should do it in this file (/etc/vim/vimrc), since debian.vim
-" will be overwritten everytime an upgrade of the vim packages is performed.
-" It is recommended to make changes after sourcing debian.vim since it alters
-" the value of the 'compatible' option.
 
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages available in Debian.
-"runtime! debian.vim
-
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
-set nocompatible
-
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
-if has("syntax")
-  syntax on
-endif
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-"set background=dark
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -30,13 +6,10 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-set number
-filetype on
-filetype plugin on
-let mapleader=";"
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
+set nocompatible
 set showcmd		" Show (partial) cmmand in status line.
 set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
@@ -44,14 +17,37 @@ set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
 set hidden		" Hide buffers when they are abandoned
+set number
+filetype on
+filetype plugin on
+let mapleader=";"
+set fdm=marker		" 6 methods: manual,indent,syntax,marker,diff,expr
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set cindent
+set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 "set mouse=a		" Enable mouse usage (all modes)
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936
+set fileencoding=utf-8
 
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
+syntax enable
+set background=dark
+
+if has('gui_running')
+	colorscheme monokai-modified
+	set guifont=Monospace\ 13
+else
+	colorscheme slate
 endif
 
 
+
+
+"auto_complete
 set tags+=~/.vim/tags/code_complete_tags
 
 "Press F5 to function the C,C++,Java script
@@ -82,14 +78,6 @@ endfunc
 
 map <F3> :tabnew .<CR>  
 map <C-F3> \be  
-
-"?
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936
-set fileencoding=utf-8
-set guifont=Monospace\ 13
 
 
 
