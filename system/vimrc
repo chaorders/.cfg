@@ -1,5 +1,5 @@
 
-"Configuration of Bundle{{{
+"Configuration of Bundle(manage plugins){{{
 "git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 "Brief help of Bundle
 " :BundleList          - list configured bundles
@@ -70,7 +70,7 @@ set shiftwidth=4
 set autoindent
 set cindent
 set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
-set mouse=a		" Enable mouse usage (all modes)
+"set mouse=a		" Enable mouse usage (all modes)
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
@@ -79,11 +79,12 @@ set fileencoding=utf-8
 
 syntax enable
 set background=dark
-colorscheme monokai
 
 if has('gui_running')
-	set guifont=Monospace\ 12
+	colorscheme solarized
+	set guifont=Monospace\ 13
 else
+	colorscheme monokai
 endif
 
 autocmd InsertLeave * se nocul    
