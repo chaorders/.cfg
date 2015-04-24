@@ -1,38 +1,97 @@
 
+"Configuration of Bundle{{{
+"git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+"Brief help of Bundle
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
+set nocompatible		"be iMproved, required
+filetype off			"required
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" original repos on github
+Bundle 'gmarik/vundle'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'crusoexia/vim-monokai'
+Bundle 'mbbill/code_complete'
+Bundle 'vim-latex/vim-latex'
+
+" vim-scripts repos www.vim-scripts.org/vim/scripts.html
+Bundle 'The-NERD-tree'
+Bundle 'taglist.vim'
+Bundle 'vimball'
+
+" non github repos
+
+filetype plugin indent on     " required!
+"}}}
+
+"Modify behavious of plugins{{{
+"auto_complete
+set tags+=~/.vim/tags/code_complete_tags
+
+"vim-powerline configuration
+set laststatus=2
+set t_Co=256
+let g:Powline_symbols='fancy'
+
+"taglist
+let Tlist_Use_Right_Window=1
+let Tlist_File_Fold_Auto_Close=1
+let Tlist_Exit_OnlyWindow=1
+let Tlist_Auto_Open=1
+let Tlist_Show_Menu=1					"Visibal in Gvim
+"}}}
+
+"Uncomment the following to have Vim jump to the last position when reopening a file{{{
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
-
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-set nocompatible
+"}}}
+ 
+"General Settings{{{
 set showcmd		" Show (partial) cmmand in status line.
 set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
-set hidden		" Hide buffers when they are abandoned
+set hidden			" Hide buffers when they are abandoned
 set number
-filetype on
-filetype plugin on
-let mapleader=";"
+let mapleader=","
 set fdm=marker		" 6 methods: manual,indent,syntax,marker,diff,expr
 set tabstop=4
+set softtabstop=8
 set shiftwidth=4
 set autoindent
 set cindent
 set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 "set mouse=a		" Enable mouse usage (all modes)
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936
+set fileencoding=utf-8
 
-"auto_complete
-set tags+=~/.vim/tags/code_complete_tags
+syntax enable
+set background=dark
 
-"Press F5 to function the C,C++,Java script
+if has('gui_running')
+	colorscheme solarized
+	set guifont=Monospace\ 13
+else
+	colorscheme monokai
+endif
+
+autocmd InsertLeave * se nocul    
+autocmd InsertEnter * se cul    
+"}}}
+
+"Press F5 to function the C,C++,Java script{{{
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
@@ -60,26 +119,9 @@ endfunc
 
 map <F3> :tabnew .<CR>  
 map <C-F3> \be  
+"}}}
 
-"?
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936
-set fileencoding=utf-8
-
-syntax enable
-set background=dark
-
-if has('gui_running')
-	colorscheme solarized
-	set guifont=Monospace\ 13
-else
-	colorscheme slate
-endif
-
-
-"auto
+"Auomaticly add file information for *.cpp *.ch *.sh *.java{{{
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
 func SetTitle() 
 	if &filetype == 'sh' 
@@ -111,11 +153,9 @@ func SetTitle()
 	endif
 	autocmd BufNewFile * normal G
 endfunc 
+"}}}
 
-autocmd InsertLeave * se nocul    
-autocmd InsertEnter * se cul    
-
-"Automatically add {} and format it.
+"Automaticly add ({'""'}) and format it{{{
 inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 inoremap { {<CR>}<Esc>O
@@ -156,6 +196,6 @@ function QuoteDelim(char)
 		return a:char.a:char."\<Esc>i"
 	endif
 endf
-
+"}}}
 
 
