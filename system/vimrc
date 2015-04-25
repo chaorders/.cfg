@@ -1,4 +1,6 @@
 
+
+
 "Configuration of Bundle(manage plugins){{{
 "git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 "Brief help of Bundle
@@ -19,11 +21,18 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'crusoexia/vim-monokai'
 Bundle 'mbbill/code_complete'
 Bundle 'vim-latex/vim-latex'
+Bundle 'kien/ctrlp.vim'
+"Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-surround'
+
 
 " vim-scripts repos www.vim-scripts.org/vim/scripts.html
 Bundle 'The-NERD-tree'
 Bundle 'taglist.vim'
 Bundle 'vimball'
+Bundle 'a.vim'
+
 
 " non github repos
 
@@ -68,6 +77,7 @@ set tabstop=4
 set softtabstop=8
 set shiftwidth=4
 set autoindent
+set smartindent
 set cindent
 set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 "set mouse=a		" Enable mouse usage (all modes)
@@ -76,6 +86,7 @@ set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936
 set fileencoding=utf-8
+"set spell
 
 syntax enable
 set background=dark
@@ -121,7 +132,7 @@ map <F3> :tabnew .<CR>
 map <C-F3> \be  
 "}}}
 
-"Auomaticly add file information for *.cpp *.ch *.sh *.java{{{
+"{{{
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
 func SetTitle() 
 	if &filetype == 'sh' 
@@ -153,49 +164,6 @@ func SetTitle()
 	endif
 	autocmd BufNewFile * normal G
 endfunc 
-"}}}
-
-"Automaticly add ({'""'}) and format it{{{
-inoremap ( ()<Esc>i
-inoremap [ []<Esc>i
-inoremap { {<CR>}<Esc>O
-autocmd Syntax html,vim inoremap < <lt>><Esc>i| inoremap > <c-r>=ClosePair('>')<CR>
-inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap ] <c-r>=ClosePair(']')<CR>
-inoremap } <c-r>=CloseBracket()<CR>
-inoremap " <c-r>=QuoteDelim('"')<CR>
-inoremap ' <c-r>=QuoteDelim("'")<CR>
-
-function ClosePair(char)
-	if getline('.')[col('.') - 1] == a:char
-		return "\<Right>"
-	else
-		return a:char
-	endif
-endf
-
-function CloseBracket()
-	if match(getline(line('.') + 1), '\s*}') < 0
-		return "\<CR>}"
-	else
-		return "\<Esc>j0f}a"
-	endif
-endf
-
-function QuoteDelim(char)
-	let line = getline('.')
-	let col = col('.')
-	if line[col - 2] == "\\"
-	"Inserting a quoted quotation mark into the string
-		return a:char
-	elseif line[col - 1] == a:char
-	"Escaping out of the string
-		return "\<Right>"
-	else
-	"Starting a string
-		return a:char.a:char."\<Esc>i"
-	endif
-endf
 "}}}
 
 
