@@ -22,9 +22,11 @@ Bundle 'crusoexia/vim-monokai'
 Bundle 'mbbill/code_complete'
 Bundle 'vim-latex/vim-latex'
 Bundle 'kien/ctrlp.vim'
-"Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-surround'
+Bundle 'jceb/vim-orgmode'
+Bundle 'jiangmiao/auto-pairs'
 
 
 " vim-scripts repos www.vim-scripts.org/vim/scripts.html
