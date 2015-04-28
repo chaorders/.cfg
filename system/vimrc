@@ -88,6 +88,7 @@ set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936
 set fileencoding=utf-8
+set list lcs=tab:\|\ 
 "set spell
 
 syntax enable
@@ -111,19 +112,23 @@ func! CompileRunGcc()
     if &filetype == 'c'
          exec "!gcc % -o %<"
          exec "! ./%<"
+		 exec "!rm ./%<"
     elseif &filetype == 'cpp'
          exec "!g++ % -o %<"
          exec "! ./%<"
+		 exec "!rm ./%<"
     elseif &filetype == 'java' 
          exec "!javac %" 
          exec "!java %<"
+		 exec "!rm ./%<.class"
     elseif &filetype == 'sh'
-         :!./%
+		 exec "!chmod 700 %"	
+         exec ":!./%"
     endif
 endfunc
 
 "C,C++ test
-map <F8> :call Rungdb()<CR>
+map <F4> :call Rungdb()<CR>
 func! Rungdb()
     exec "w"
     exec "!g++ % -g -o %<"
