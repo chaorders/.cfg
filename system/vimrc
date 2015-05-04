@@ -105,7 +105,7 @@ autocmd InsertLeave * se nocul
 autocmd InsertEnter * se cul    
 "}}}
 
-"Press F5 to function the C,C++,Java,Perl script{{{
+"Press F5 to function the C,C++,Java script{{{
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
