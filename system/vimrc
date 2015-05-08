@@ -19,7 +19,6 @@ Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'crusoexia/vim-monokai'
-Bundle 'mbbill/code_complete'
 Bundle 'vim-latex/vim-latex'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/syntastic'
@@ -27,6 +26,8 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-surround'
 Bundle 'jceb/vim-orgmode'
 Bundle 'jiangmiao/auto-pairs'
+Bundle 'ervandew/eclim'
+Bundle 'drmingdrmer/xptemplate'
 
 
 " vim-scripts repos www.vim-scripts.org/vim/scripts.html
@@ -34,6 +35,7 @@ Bundle 'The-NERD-tree'
 Bundle 'taglist.vim'
 Bundle 'vimball'
 Bundle 'a.vim'
+Bundle 'javacomplete'
 
 
 " non github repos
@@ -42,7 +44,7 @@ filetype plugin indent on     " required!
 "}}}
 
 "Modify behavious of plugins{{{
-"auto_complete
+"code_complete
 set tags+=~/.vim/tags/code_complete_tags
 
 "vim-powerline configuration
@@ -56,6 +58,14 @@ let Tlist_File_Fold_Auto_Close=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Auto_Open=1
 let Tlist_Show_Menu=1					"Visibal in Gvim
+
+"xptemplate
+"let g:xptempalate_vars="$author=thomas"
+
+"javacomplete
+setlocal omnifunc=javacomplete#Complete
+autocmd FileType java set omnifunc=javacomplete#Complete
+autocmd FileType java set completefunc=javacomplete#CompleteParamsInf
 "}}}
 
 "Uncomment the following to have Vim jump to the last position when reopening a file{{{
@@ -143,7 +153,7 @@ map <C-F3> \be
 "}}}
 
 "{{{
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
+autocmd BufNewFile *.cpp,*.[ch],*.sh exec ":call SetTitle()"
 func SetTitle() 
 	if &filetype == 'sh' 
 	        call setline(1,"\#########################################################################") 
@@ -175,5 +185,6 @@ func SetTitle()
 	autocmd BufNewFile * normal G
 endfunc 
 "}}}
+
 
 
