@@ -28,7 +28,7 @@ Bundle 'jceb/vim-orgmode'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'ervandew/eclim'
 Bundle 'drmingdrmer/xptemplate'
-
+"Bundle 'xuhdev/SingleCompile'
 
 " vim-scripts repos www.vim-scripts.org/vim/scripts.html
 Bundle 'The-NERD-tree'
@@ -36,6 +36,7 @@ Bundle 'taglist.vim'
 Bundle 'vimball'
 Bundle 'a.vim'
 Bundle 'javacomplete'
+Bundle 'winmanager'
 
 
 " non github repos
@@ -44,8 +45,15 @@ filetype plugin indent on     " required!
 "}}}
 
 "Modify behavious of plugins{{{
-"code_complete
-set tags+=~/.vim/tags/code_complete_tags
+"
+"ctags setting  see map setting: <F3>
+set tags=tags
+set tags+=./tags
+set tags+=~/git/tags
+
+"winmanager key:wm
+let g:winManagerWindowLayout='TagList|FileExplorer'
+let g:persistentBehaviour=0
 
 "vim-powerline configuration
 set laststatus=2
@@ -56,7 +64,8 @@ let g:Powline_symbols='fancy'
 let Tlist_Use_Right_Window=1
 let Tlist_File_Fold_Auto_Close=1
 let Tlist_Exit_OnlyWindow=1
-let Tlist_Auto_Open=1
+
+"let Tlist_Auto_Open=1
 let Tlist_Show_Menu=1					"Visibal in Gvim
 
 "xptemplate
@@ -83,7 +92,6 @@ set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
 set hidden			" Hide buffers when they are abandoned
 set number
-let mapleader=","
 set fdm=marker		" 6 methods: manual,indent,syntax,marker,diff,expr
 set tabstop=4
 set softtabstop=8
@@ -92,7 +100,7 @@ set autoindent
 set smartindent
 set cindent
 set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
-"set mouse=a		" Enable mouse usage (all modes)
+set mouse=a		" Enable mouse usage (all modes)
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
@@ -113,6 +121,15 @@ endif
 
 autocmd InsertLeave * se nocul    
 autocmd InsertEnter * se cul    
+"}}}
+
+"key map setting{{{
+let mapleader=","
+map <F2> :tabnew .<CR>  
+map <F3> :!ctags -R --c-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+"nmap <F4> :SCCompile<CR>
+"nmap <F5> :SCCompileRun<CR>
+nmap wm :WMToggle<CR>
 "}}}
 
 "Press F5 to function the C,C++,Java script{{{
@@ -147,44 +164,4 @@ func! Rungdb()
     exec "!g++ % -g -o %<"
     exec "!gdb ./%<"
 endfunc
-
-map <F3> :tabnew .<CR>  
-map <C-F3> \be  
 "}}}
-
-"{{{
-autocmd BufNewFile *.cpp,*.[ch],*.sh exec ":call SetTitle()"
-func SetTitle() 
-	if &filetype == 'sh' 
-	        call setline(1,"\#########################################################################") 
-		call append(line("."), "\# File Name: ".expand("%")) 
-	        call append(line(".")+1, "\# Author: Thomas") 
-	        call append(line(".")+2, "\# mail: thomas.chen.au@gmail.com") 
-	        call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
-	        call append(line(".")+4, "\#########################################################################") 
-	        call append(line(".")+5, "\#!/bin/bash") 
-	        call append(line(".")+6, "") 
-	else 
-        	call setline(1, "/*************************************************************************") 
-		call append(line("."), "    > File Name: ".expand("%")) 
-	        call append(line(".")+1, "    > Author: Thomas") 
-	        call append(line(".")+2, "    > Mail: thomas.chen.au@gmail.com ") 
-		call append(line(".")+3, "    > Created Time: ".strftime("%c")) 
-	        call append(line(".")+4, " ************************************************************************/") 
-	        call append(line(".")+5, "")
-	endif
-        if &filetype == 'cpp'
-	        call append(line(".")+6, "#include<iostream>")
-	        call append(line(".")+7, "using namespace std;")
-	        call append(line(".")+8, "")
-	endif
-	if &filetype == 'c'
-	        call append(line(".")+6, "#include<stdio.h>")
-		call append(line(".")+7, "")
-	endif
-	autocmd BufNewFile * normal G
-endfunc 
-"}}}
-
-
-

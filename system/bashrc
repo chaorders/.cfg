@@ -81,5 +81,5 @@ unset use_color safe_term match_lhs
 
 alias youdao='python /opt/dict.py'
 
-export CLASSPATH="/home/thomas/git/thinking-in-java/bin"
-alias javac='javac -d $CLASSPATH'
+export CLASSPATH="/home/thomas/git/thinking-in-java/bin:."
+alias javac='javac -d ${CLASSPATH%%:*}'
