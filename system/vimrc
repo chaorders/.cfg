@@ -26,7 +26,6 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-surround'
 Bundle 'jceb/vim-orgmode'
 Bundle 'jiangmiao/auto-pairs'
-Bundle 'ervandew/eclim'
 Bundle 'drmingdrmer/xptemplate'
 "Bundle 'xuhdev/SingleCompile'
 
