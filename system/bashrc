@@ -81,5 +81,11 @@ unset use_color safe_term match_lhs
 
 alias youdao='python /opt/dict.py'
 
-alias javac='javac -d ${CLASSPATH%%:*}'
-export CLASSPATH="/home/thomas/git/thinking-in-java/bin:."
+alias gcc-objc='gcc `gnustep-config --objc-flags` $@ -lgnustep-base -lobjc'
+
+function objc() {
+	source=$1
+	gcc `gnustep-config --objc-flags` $@ -o ${@%.*}.exe -lgnustep-base -lobjc
+	rm ${@%.*}.d;
+}
+
