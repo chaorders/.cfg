@@ -1,12 +1,19 @@
 #!/bin/bash
+set -e
 
 vc_expect="h264"
 ac_expect="aac"
 
 
-dir=`ls |grep -E '(mkv|flv|mov|avi)$'`
+dir=`ls |grep -E '(mkv|avi|flv|mov)$'`
+
+for null in $dir;do
+	total=$((total+1))
+done
+
 for input in $dir; do
-	output=${input%.*}.mp4
+	count=$((count+1))
+	output="${input%.*}.mp4"
 	
 	vc_exe="copy"
 	ac_exe="copy"
@@ -25,6 +32,7 @@ for input in $dir; do
 		ac_exe="aac"
 	fi
 
-	echo -e "Transforming " $input " to " $output ...
-	ffmpeg -i $input -y -c:v $vc_exe -c:a $ac_exe -strict -2 -f mp4 $output 
+	echo "$count/$total"    "Transforming " "[$input]" #"to" $output   
+	ffmpeg -i "$input" -y -c:v $vc_exe -c:a $ac_exe -strict -2 -f mp4 "$output" 2>/dev/null
+	rm "$input"
 done
