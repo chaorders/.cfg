@@ -6,7 +6,7 @@ ac_expect="aac"
 
 dir=`ls |grep 'mkv\|flv'`
 for input in $dir; do
-	output=${input%%.mkv}.mp4
+	output=${input%.*}.mp4
 	
 	vc_exe="copy"
 	ac_exe="copy"
