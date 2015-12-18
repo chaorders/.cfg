@@ -4,7 +4,7 @@ vc_expect="h264"
 ac_expect="aac"
 
 
-dir=`ls |grep 'mkv\|flv'`
+dir=`ls |grep -E '(mkv|flv|mov|avi)$'`
 for input in $dir; do
 	output=${input%.*}.mp4
 	
