@@ -1,0 +1,30 @@
+#!/bin/bash
+
+vc_expect="h264"
+ac_expect="aac"
+
+
+dir=`ls |grep 'mkv\|flv'`
+for input in $dir; do
+	output=${input%%.mkv}.mp4
+	
+	vc_exe="copy"
+	ac_exe="copy"
+	
+	
+	video_code_raw=`ffprobe -show_streams $input 2>/dev/null | grep codec_name | head -1`
+	audio_code_raw=`ffprobe -show_streams $input 2>/dev/null | grep codec_name | tail -1`
+	video_code_actual=${video_code_raw#*=}
+	audio_code_actual=${audio_code_raw#*=}
+
+	if [ "$vc_expect" != "$video_code_actual" ]; then
+		vc_exe="h264"
+	fi
+
+	if [ "$ac_expect" != "$audio_code_actual" ]; then
+		ac_exe="aac"
+	fi
+
+	echo -e "Transforming " $input " to " $output ...
+	ffmpeg -i $input -y -c:v $vc_exe -c:a $ac_exe -strict -2 -f mp4 $output 
+done
