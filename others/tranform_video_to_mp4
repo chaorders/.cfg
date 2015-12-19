@@ -4,7 +4,6 @@ set -e
 vc_expect="h264"
 ac_expect="aac"
 
-
 dir=`ls |grep -E '(mkv|avi|flv|mov)$'`
 
 for null in $dir;do
@@ -18,9 +17,9 @@ for input in $dir; do
 	vc_exe="copy"
 	ac_exe="copy"
 	
-	
-	video_code_raw=`ffprobe -show_streams $input 2>/dev/null | grep h264`
-	audio_code_raw=`ffprobe -show_streams $input 2>/dev/null | grep aac`
+	# The reason of "cat": if grep match nothing, it return 1 and "set -e" will end the script
+	video_code_raw=`ffprobe -show_streams $input 2>/dev/null | grep h264 | cat`
+	audio_code_raw=`ffprobe -show_streams $input 2>/dev/null | grep aac | cat`
 	video_code_actual=${video_code_raw#*=}
 	audio_code_actual=${audio_code_raw#*=}
 
@@ -34,6 +33,7 @@ for input in $dir; do
 
 	echo "$count/$total"    "Transforming " "[$input]" #"to" $output   
 	ffmpeg -i "$input" -y -c:v $vc_exe -c:a $ac_exe -strict -2 -f mp4 "$output" 2>>./ffmpeg.log
+
 	rm "$input"
 done
 
