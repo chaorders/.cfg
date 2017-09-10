@@ -16,27 +16,25 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " original repos on github
-Bundle 'gmarik/vundle'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'crusoexia/vim-monokai'
-Bundle 'vim-latex/vim-latex'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-surround'
-Bundle 'jceb/vim-orgmode'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'drmingdrmer/xptemplate'
-"Bundle 'xuhdev/SingleCompile'
+Plugin 'gmarik/vundle'
+
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'crusoexia/vim-monokai'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-surround'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'drmingdrmer/xptemplate'
+" Plugin 'jceb/vim-orgmode'
+" Plugin 'vim-latex/vim-latex'
+
 
 " vim-scripts repos www.vim-scripts.org/vim/scripts.html
-Bundle 'The-NERD-tree'
-Bundle 'taglist.vim'
-Bundle 'vimball'
-Bundle 'a.vim'
-Bundle 'javacomplete'
-Bundle 'winmanager'
+Plugin 'The-NERD-tree'
+Plugin 'vimball'
+
 
 
 " non github repos
@@ -46,10 +44,6 @@ filetype plugin indent on     " required!
 
 "Modify behavious of plugins{{{
 "
-"ctags setting  see map setting: <F3>
-set tags=tags
-set tags+=./tags
-set tags+=~/git/tags
 
 "winmanager key:wm
 let g:winManagerWindowLayout='FileExplorer'
@@ -60,13 +54,19 @@ set laststatus=2
 set t_Co=256
 let g:Powline_symbols='fancy'
 
-"taglist
-let Tlist_Use_Right_Window=1
-let Tlist_File_Fold_Auto_Close=1
-let Tlist_Exit_OnlyWindow=1
-
-let Tlist_Auto_Open=1
-let Tlist_Show_Menu=1					"Visibal in Gvim
+"Nerdtree                                                                                                                                         |~
+autocmd VimEnter * NERDTree         "auto open NERDTree                                                                                           |~
+autocmd VimEnter * wincmd p         "set current buffer page auto focused                                                                         |~
+let g:NERDTreeWinPos='right'                                                                                                                      |~
+                                                                                                                                                  |~
+function! s:CloseIfOnlyNerdTreeLeft()                                                                                                             |~
+    if winnr("$") == 1                                                                                                                            |~
+        if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)                                                                     |~
+            q                                                                                                                                     |~
+        endif                                                                                                                                     |~
+    endif                                                                                                                                         |~
+endfunction                                                                                                                                       |~
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 "xptemplate
 "let g:xptempalate_vars="$author=thomas"
