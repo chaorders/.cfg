@@ -3,6 +3,7 @@
 
 "Configuration of Bundle(manage plugins){{{
 "git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+"Install: vim +PluginInstall +qall
 "Brief help of Bundle
 " :BundleList          - list configured bundles
 " :BundleInstall(!)    - install(update) bundles
