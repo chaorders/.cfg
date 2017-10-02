@@ -1,0 +1,14 @@
+{
+	"try-catch": {
+		"prefix": "try",
+		"body": [
+			"try {",
+			"\t${1}",
+			"} catch (${2:err}) {",
+			"\t${3:console.err(${2:err});}",
+			"}",
+			"$0"
+		],
+		"description": "try catch block"
+	}
+}
