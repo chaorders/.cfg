@@ -94,7 +94,7 @@ set hidden			" Hide buffers when they are abandoned
 set number
 set fdm=marker		" 6 methods: manual,indent,syntax,marker,diff,expr
 set tabstop=4
-set softtabstop=8
+set softtabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
@@ -106,7 +106,8 @@ set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936
 set fileencoding=utf-8
-set list lcs=tab:\|\ 
+set backspace=2
+"set list lcs=tab:\|\ 
 "set spell
 
 syntax enable
