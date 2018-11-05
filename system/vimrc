@@ -54,18 +54,18 @@ set laststatus=2
 set t_Co=256
 let g:Powline_symbols='fancy'
 
-"Nerdtree                                                                                                                                         |~
-autocmd VimEnter * NERDTree         "auto open NERDTree                                                                                           |~
-autocmd VimEnter * wincmd p         "set current buffer page auto focused                                                                         |~
-let g:NERDTreeWinPos='right'                                                                                                                      |~
-                                                                                                                                                  |~
-function! s:CloseIfOnlyNerdTreeLeft()                                                                                                             |~
-    if winnr("$") == 1                                                                                                                            |~
-        if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)                                                                     |~
-            q                                                                                                                                     |~
-        endif                                                                                                                                     |~
-    endif                                                                                                                                         |~
-endfunction                                                                                                                                       |~
+"Nerdtree
+autocmd VimEnter * NERDTree         "auto open NERDTree
+autocmd VimEnter * wincmd p         "set current buffer page auto focused
+let g:NERDTreeWinPos='right'
+
+function! s:CloseIfOnlyNerdTreeLeft()
+    if winnr("$") == 1
+        if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+            q
+        endif
+    endif
+endfunction
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 "xptemplate
